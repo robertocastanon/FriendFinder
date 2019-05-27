@@ -12,4 +12,5 @@ module.exports = function(app) {
 
     //post api rout to /api/friends. handle incoming survey results
     // this route will also be used to handle the compatiblity logic
+
 }
