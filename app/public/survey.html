@@ -16,7 +16,7 @@
 
 <body>
     <div class="container">
-        <h1>Survey Questions</h1>
+        <h1>Survey Questions <a href="/"><button type="button" class="float-right btn btn-lg btn-primary"><h4><i class="fas fa-home"></i> Go Home</h4></button></a></h1>
         <hr>
         <h2><strong>About You!</strong></h2>
         <h4>Name (Required)</h4>
@@ -137,7 +137,8 @@
           <option value="5">5 (Strongly Agree)</option>
         </select>
 
-        <hr>
+        <br>
+        <br>
 
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
             Submit</button>
@@ -152,6 +153,28 @@
                 </div>
         </footer>
     </div>
+
+      <!-- Modal -->
+  <div id="results-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+    
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h2 class="modal-title"><strong>Best Match</strong></h2>
+            </div>
+            <div class="modal-body">
+              <h2 id="match-name"></h2>
+              <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+    
+        </div>
+      </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
