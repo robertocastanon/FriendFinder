@@ -10,10 +10,11 @@ module.exports = function (app) {
   app.post('/api/friends', function (req, res) {
 
     console.log(req.body.scores)
-    var input = req.body
-
+    var addFriend = req.body
+    console.log(addFriend)
+    friends.push(addFriend)
+    res.json(friends)
   })
-
   // post api rout to /api/friends. handle incoming survey results
   // this route will also be used to handle the compatiblity logic
 }

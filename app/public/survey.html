@@ -166,7 +166,7 @@
             </div>
             <div class="modal-body">
               <h2 id="match-name"></h2>
-              <img id="match-img" src="" alt="">
+              <img id="match-photo">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -225,7 +225,37 @@ document.querySelector('#submit').addEventListener('click', function(event) {
   console.log(add.scores)
   console.log(add.scores[0])
 
-  app.post('/api/friends')
+  // app.post('/api/friends', add,
+  //   function(data) {
+  //     if (data) {
+  //       document.querySelector('#match-name').text(data.name)
+  //       document.querySelector('#match-photo').setAttribute('src', data.img)
+  //       document.querySelector('#results-modal').modal('toggle')
+  //     }
+  //   }
+  // )
+  fetch('api/friends', add,
+    function(data) {
+      if (data) {
+        document.querySelector('#match-name').text(data.name)
+        document.querySelector('#match-photo').setAttribute('src', data.img)
+        document.querySelector('#results-modal').modal('toggle')
+      } else {
+      document.querySelector('#myName').value = ''
+      document.querySelector('#myPhoto').value = ''
+      document.querySelector('#q1').value = ''
+      document.querySelector('#q2').value = ''
+      document.querySelector('#q3').value = ''
+      document.querySelector('#q4').value = ''
+      document.querySelector('#q5').value = ''
+      document.querySelector('#q6').value = ''
+      document.querySelector('#q7').value = ''
+      document.querySelector('#q8').value = ''
+      document.querySelector('#q9').value = ''
+      document.querySelector('#q10').value = ''
+      }
+    }
+  )
 })
 </script>
 
