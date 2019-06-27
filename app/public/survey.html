@@ -20,10 +20,10 @@
         <hr>
         <h2><strong>About You!</strong></h2>
         <h4>Name (Required)</h4>
-        <input type="text" id="name" class="form-control" required>
+        <input type="text" id="myName" class="form-control" required>
 
         <h4>Link to an Image (Required)</h4>
-        <input type="text" id="name" class="form-control" required>
+        <input type="text" id="myPhoto" class="form-control" required>
 
         <hr>
 
@@ -188,5 +188,45 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 </body>
+
+<script type='text/JavaScript'>
+
+//capture form inputs
+document.querySelector('#submit').addEventListener('click', function(event) {
+  event.preventDefault();
+  alert('BRUH')
+
+  //form validation
+  function validate() {
+    var valid = true;
+    document.querySelector('form-control')
+  }
+  validate()
+
+  var add = {
+    addName: document.querySelector('#myName').value.trim(),
+    addPhoto: document.querySelector('#myPhoto').value.trim(),
+    scores: [
+      document.querySelector('#q1').value,
+      document.querySelector('#q2').value,
+      document.querySelector('#q3').value,
+      document.querySelector('#q4').value,
+      document.querySelector('#q5').value,
+      document.querySelector('#q6').value,
+      document.querySelector('#q7').value,
+      document.querySelector('#q8').value,
+      document.querySelector('#q9').value,
+      document.querySelector('#q10').value
+    ]
+  }
+  console.log(add)
+  console.log('Name: ' + add.addName)
+  console.log('Photo Link: ' + add.addPhoto)
+  console.log(add.scores)
+  console.log(add.scores[0])
+
+  app.post('/api/friends')
+})
+</script>
 
 </html>
