@@ -241,6 +241,8 @@ document.querySelector('#submitBtn').addEventListener('click', function(event) {
     return response.json()
   })
   .then(data => {
+    // pop() excludes what the issue input in the comparing match function
+    data.pop()
     for (let friend of data) {
       total = 0
       // create new array with map() to return score

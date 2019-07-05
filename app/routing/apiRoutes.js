@@ -15,7 +15,7 @@ module.exports = function (app) {
     console.log(addFriend)
     friends.push(addFriend)
     res.json(friends)
-    friend = []
+    // friend = []
 
   })
   // post api rout to /api/friends. handle incoming survey results
