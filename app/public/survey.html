@@ -20,10 +20,10 @@
         <hr>
         <h2><strong>About You!</strong></h2>
         <h4>Name (Required)</h4>
-        <input type="text" id="myName" class="form-control" required>
+        <input type="text" id="name" class="form-control" required>
 
         <h4>Link to an Image (Required)</h4>
-        <input type="text" id="myPhoto" class="form-control" required>
+        <input type="text" id="photo" class="form-control" required>
 
         <hr>
 
@@ -140,12 +140,11 @@
         <br>
         <br>
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
-            Submit</button>
-       
+            <button type="button" id="submitBtn"class="btn btn-primary" data-toggle="modal" data-target="#results-modal">
+              Submit
+            </button>
 
         <hr>
-
 
         <footer class="footer">
                 <div class="container">
@@ -154,27 +153,25 @@
         </footer>
     </div>
 
-      <!-- Modal -->
-  <div id="results-modal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-    
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h2 class="modal-title"><strong>Best Match</strong></h2>
-            </div>
-            <div class="modal-body">
-              <h2 id="match-name"></h2>
-              <img id="match-photo">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-    
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="results-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your new Best Friend is....</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -191,21 +188,22 @@
 
 <script type='text/JavaScript'>
 
+// sets the score, total to 0 or empty
+var modalBody = document.querySelector('.modal-body')
+var scores = []
+var total = 0
+
 //capture form inputs
-document.querySelector('#submit').addEventListener('click', function(event) {
+document.querySelector('#submitBtn').addEventListener('click', function(event) {
   event.preventDefault();
-  alert('BRUH')
+  var friendChange = []
+  var totalChange = []
+  var biggChange = { change: 1000}
 
-  //form validation
-  function validate() {
-    var valid = true;
-    document.querySelector('form-control')
-  }
-  validate()
-
+  // capture the values that the issue input
   var add = {
-    addName: document.querySelector('#myName').value.trim(),
-    addPhoto: document.querySelector('#myPhoto').value.trim(),
+    name: document.querySelector('#name').value.trim(),
+    photo: document.querySelector('#photo').value.trim(),
     scores: [
       document.querySelector('#q1').value,
       document.querySelector('#q2').value,
@@ -220,42 +218,56 @@ document.querySelector('#submit').addEventListener('click', function(event) {
     ]
   }
   console.log(add)
-  console.log('Name: ' + add.addName)
-  console.log('Photo Link: ' + add.addPhoto)
+  console.log('Name: ' + add.name)
+  console.log('Photo Link: ' + add.name)
   console.log(add.scores)
   console.log(add.scores[0])
 
-  // app.post('/api/friends', add,
-  //   function(data) {
-  //     if (data) {
-  //       document.querySelector('#match-name').text(data.name)
-  //       document.querySelector('#match-photo').setAttribute('src', data.img)
-  //       document.querySelector('#results-modal').modal('toggle')
-  //     }
-  //   }
-  // )
-  fetch('api/friends', add,
-    function(data) {
-      if (data) {
-        document.querySelector('#match-name').text(data.name)
-        document.querySelector('#match-photo').setAttribute('src', data.img)
-        document.querySelector('#results-modal').modal('toggle')
-      } else {
-      document.querySelector('#myName').value = ''
-      document.querySelector('#myPhoto').value = ''
-      document.querySelector('#q1').value = ''
-      document.querySelector('#q2').value = ''
-      document.querySelector('#q3').value = ''
-      document.querySelector('#q4').value = ''
-      document.querySelector('#q5').value = ''
-      document.querySelector('#q6').value = ''
-      document.querySelector('#q7').value = ''
-      document.querySelector('#q8').value = ''
-      document.querySelector('#q9').value = ''
-      document.querySelector('#q10').value = ''
+  var addFriend = {
+    name: name,
+    photo: photo,
+    scores: scores
+  }
+
+  //post that sends the info the user input into friendArray in friends.js
+  fetch('/api/friends', {
+    method: 'POST',
+    body: JSON.stringify(add),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    return response.json()
+  })
+  .then(data => {
+    for (let friend of data) {
+      total = 0
+      // create new array with map() to return score
+      totalChange = friend.scores.map(function (item, index) {
+        return Math.abs(item - add.scores[index]);
+      })
+      for (let val of totalChange) {
+        total += val;
+      }
+      // push friendArray
+      friend.change = total
+      friendChange.push(friend)
+    }
+    // finds the best match
+    for (let diff of friendChange) {
+      if(diff.change < biggChange.change) {
+        biggChange = diff
       }
     }
-  )
+    //adds content to the modal
+    modalBody.innerHTML = `<h1>${biggChange.name}</h1>
+    <hr>
+    <img src='${biggChange.photo}' width=75%>`
+    console.log('Friends change', friendChange)
+    console.log(biggChange.name)
+    console.log(biggChange.photo)
+  })
 })
 </script>
 
