@@ -201,6 +201,7 @@ document.querySelector('#submitBtn').addEventListener('click', function(event) {
   var biggChange = { change: 1000}
 
   // capture the values that the issue input
+  // capture the name, photo url and the score
   var add = {
     name: document.querySelector('#name').value.trim(),
     photo: document.querySelector('#photo').value.trim(),
@@ -217,6 +218,7 @@ document.querySelector('#submitBtn').addEventListener('click', function(event) {
       document.querySelector('#q10').value
     ]
   }
+  // console.log info
   console.log(add)
   console.log('Name: ' + add.name)
   console.log('Photo Link: ' + add.name)
@@ -224,6 +226,7 @@ document.querySelector('#submitBtn').addEventListener('click', function(event) {
   console.log(add.scores[0])
 
   // nonn functional catch if else
+  // this is here just for an example
 
   // scores = []
   // if (document.querySelector('#name').value === "") {
@@ -248,8 +251,10 @@ document.querySelector('#submitBtn').addEventListener('click', function(event) {
     scores: scores
   }
 
+  // start of the fetch sequence
   console.log('launch')
 
+  //grabs in the data inside the friends.js file
   //post that sends the info the user input into friendArray in friends.js
   fetch('/api/friends', {
     method: 'POST',
