@@ -28,7 +28,7 @@
         <hr>
 
         <h3><strong>Question 1</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>Cats are furry</h4>
         <select class="chosen-select" id="q1">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -39,7 +39,7 @@
         </select>
 
         <h3><strong>Question 2</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>Aliens are real</h4>
         <select class="chosen-select" id="q2">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -50,7 +50,7 @@
         </select>
 
         <h3><strong>Question 3</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>The color yellow is objectively bad</h4>
         <select class="chosen-select" id="q3">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -61,7 +61,7 @@
         </select>
 
         <h3><strong>Question 4</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>Skyler from Breaking Bad is annoying</h4>
         <select class="chosen-select" id="q4">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -72,7 +72,7 @@
         </select>
 
         <h3><strong>Question 5</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>Mondays are not that bad</h4>
         <select class="chosen-select" id="q5">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -83,7 +83,7 @@
         </select>
 
         <h3><strong>Question 6</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>Butter on popcorn</h4>
         <select class="chosen-select" id="q6">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -94,7 +94,7 @@
         </select>
 
         <h3><strong>Question 7</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>Playing a game is only fun when you win</h4>
         <select class="chosen-select" id="q7">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -105,7 +105,7 @@
         </select>
 
         <h3><strong>Question 8</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>Summer is the best season of the year</h4>
         <select class="chosen-select" id="q8">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -116,7 +116,7 @@
         </select>
 
         <h3><strong>Question 9</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>It's okay to lie</h4>
         <select class="chosen-select" id="q9">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -127,7 +127,7 @@
         </select>
 
         <h3><strong>Question 10</strong></h3>
-        <h4>placeholder text</h4>
+        <h4>The internet is better than TV</h4>
         <select class="chosen-select" id="q10">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
@@ -223,11 +223,32 @@ document.querySelector('#submitBtn').addEventListener('click', function(event) {
   console.log(add.scores)
   console.log(add.scores[0])
 
+  // nonn functional catch if else
+
+  // scores = []
+  // if (document.querySelector('#name').value === "") {
+  //   console.log('wowowowowowowowoowowowowowowow')
+  //   document.querySelector('#submitBtn').toggleAttribute('data-toggle')
+  //   alert('Fill in the entire survey please')
+  //   return false
+  // } else {
+  //   name = ''
+  //   photo = ''
+  //   console.log('else')
+  //   document.querySelector('#submitBtn').toggleAttribute('data-toggle')
+  //   launchFetch()
+  // }
+
+  console.log('test')
+  scores = 0
+  
   var addFriend = {
     name: name,
     photo: photo,
     scores: scores
   }
+
+  console.log('launch')
 
   //post that sends the info the user input into friendArray in friends.js
   fetch('/api/friends', {
@@ -267,8 +288,8 @@ document.querySelector('#submitBtn').addEventListener('click', function(event) {
     <hr>
     <img src='${biggChange.photo}' width=75%>`
     console.log('Friends change', friendChange)
-    console.log(biggChange.name)
-    console.log(biggChange.photo)
+    console.log('Your new friend', biggChange.name)
+    console.log('img url', biggChange.photo)
   })
 })
 </script>

@@ -2,7 +2,6 @@ var friends = require('../data/friends')
 
 // routing
 module.exports = function (app) {
-  // friends = []
 
   app.get('/api/friends', function (req, res) {
     res.json(friends)
@@ -15,7 +14,7 @@ module.exports = function (app) {
     console.log(addFriend)
     friends.push(addFriend)
     res.json(friends)
-    // friend = []
+    friend = []
 
   })
   // post api rout to /api/friends. handle incoming survey results
